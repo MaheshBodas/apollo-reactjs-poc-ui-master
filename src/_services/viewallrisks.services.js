@@ -1,12 +1,16 @@
-import auth from '../api/auth'
+import client from '../api/apolloclient'
+import { viewallrisksGraphQL } from '../_graphql';
 export const viewallrisksService = {
-    getRisks    
+    getRisks        
 };
 
 function getRisks(risk_type_id) {
+  const variables = { risktypeid : risk_type_id };   
     return new Promise((resolve, reject) => {
-        auth.getRisks(risk_type_id).then(response => {
-          const riskinstances = response
+      client.query({query: viewallrisksGraphQL.GET_ALL_RISK_QUERY, variables}).then(response => {          
+          const {data: {riskinstances = null }} = response
+          console.log('riskinstance')
+          console.log(riskinstances)          
           if(riskinstances !== null) {
             resolve(riskinstances)
           }

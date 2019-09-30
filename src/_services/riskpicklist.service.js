@@ -1,8 +1,9 @@
-import auth from '../api/auth'
+import client from '../api/apolloclient'
+import { riskpicklistGraphQL } from '../_graphql';
 export const riskpicklistService = {
     getRiskFieldTypeList,
     getRiskTypeKeys,
-    getRiskKeys    
+    getRiskKeys
 };
 
 function getRiskFieldTypeList() {
@@ -22,8 +23,8 @@ function getRiskFieldTypeList() {
 
 function getRiskTypeKeys() {
     return new Promise((resolve, reject) => {
-        auth.getRiskTypeKeys().then(response => {
-          const risktypekeys = response
+      client.query({query: riskpicklistGraphQL.GET_RISK_TYPE_KEYS_QUERY}).then(response => {          
+        const {data: {risktypekeys = null }} = response          
           if(risktypekeys !== null) {
             resolve(risktypekeys)
           }
@@ -41,8 +42,8 @@ function getRiskTypeKeys() {
 
 function getRiskKeys() {
     return new Promise((resolve, reject) => {
-        auth.getRiskKeys().then(response => {
-          const riskkeys = response
+      client.query({query: riskpicklistGraphQL.GET_RISK_KEYS_QUERY}).then(response => {          
+        const {data: {riskkeys = null }} = response             
           if(riskkeys !== null) {
             resolve(riskkeys)
           }

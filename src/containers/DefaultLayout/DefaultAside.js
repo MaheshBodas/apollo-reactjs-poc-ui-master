@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -10,18 +10,31 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultAside extends Component {
-
+  _isMounted = false
   constructor(props) {
     super(props);
-
+    console.log('this._isMounted')
+    console.log(this._isMounted)
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1',
     };
   }
+  componentDidMount() { 
+    console.log('componentDidMount')     
+    this._isMounted = true;
+  }
 
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
+  componentWillUnmount() {
+    console.log('componentWillUnmount')    
+    this._isMounted = false;
+  }
+
+  componentDidCatch(error, info) {
+    console.log('componentDidCatch ' + error)                
+  }
+  toggle(tab) {           
+    if (this._isMounted && (this.state.activeTab !== tab)) {
       this.setState({
         activeTab: tab,
       });
@@ -29,7 +42,6 @@ class DefaultAside extends Component {
   }
 
   render() {
-
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
 

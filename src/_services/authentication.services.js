@@ -1,9 +1,11 @@
 import auth from '../api/auth'
+import client from '../api/apolloclient'
 import { setToken, removeToken } from '../utils/auth'
+import { authenticationGraphQL } from '../_graphql';
 export const authenticationService = {
     login,
     logout,    
-    getUserDetails,
+    getUserDetails,    
     getAll    
 };
 
@@ -55,16 +57,14 @@ function logout() {
 }
 
 function getUserDetails(userName) {
+  const variables = { user_name: userName };   
     return new Promise((resolve, reject) => {
-      auth.getAccountDetails(userName).then(response => {
-      console.log('auth.getAccountDetails success')
-      const userdata = response
-      console.log('getAccountDetails response')        
-      console.log(userdata)    
-      if(userdata && userdata.length >= 1 ) {
-        const userDataObj = userdata[0]
-        console.log(userDataObj)
-        console.log(userDataObj.is_superuser)
+      client.query({query: authenticationGraphQL.GET_USER_DETAILS_QUERY, variables}).then(response => {            
+      console.log('getAccountDetails response')                    
+      const {data: {userdata = null }} = response
+      if(userdata !== null) {    
+        console.log(userdata)
+        console.log(userdata.is_superuser)
         resolve(userdata)
       } else {
           const strError  = 'No user details found for user ' + userName

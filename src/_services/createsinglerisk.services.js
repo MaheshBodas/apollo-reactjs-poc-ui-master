@@ -1,18 +1,19 @@
-import auth from '../api/auth'
+import client from '../api/apolloclient'
+import { createriskGraphQL } from '../_graphql';
 import { RiskPostData } from '../utils/createriskctrl'
 export const createsingleriskService = {
     getRiskFromType,
-    createRisk    
+    createRisk
 };
 
 function getRiskFromType(risk_type_id, itemsPerRow) {
+  const variables = { risktypeid : risk_type_id }; 
     return new Promise((resolve, reject) => {
-        auth.getRiskType(risk_type_id).then(response => {
-          var risktypedata = response
-          console.log('getRiskType Response Data')
-          console.log(risktypedata)
-          if(risktypedata && risktypedata.length >= 1 ) {
-            var risktypeobj = risktypedata[0]
+      client.query({query: createriskGraphQL.GET_SINGLE_RISK_TYPE_QUERY, variables}).then(response => {          
+          const {data: {risktypeobj = null }} = response    
+          console.log('risktypeobj')
+          console.log(risktypeobj)  
+          if(risktypeobj !== null ) {            
             var output = {risktypeobj: risktypeobj, itemsPerRow: itemsPerRow}
             resolve(output)
           }
@@ -29,14 +30,15 @@ function getRiskFromType(risk_type_id, itemsPerRow) {
 }
 
 //
-function createRisk(risktype, riskFieldArray, inputFormFields) {
+function createRisk(risktype, riskFieldArray, inputFormFields) {  
   const riskpostobj = processRiskFields(risktype, riskFieldArray, inputFormFields)
+  const variables = { riskInput : riskpostobj }; 
   console.log('Posting data to server')
   var strPostData = JSON.stringify(riskpostobj)
   console.log(strPostData)
-    
+  // console.log(createriskGraphQL.CREATE_RISK_MUTATION)
   return new Promise((resolve, reject) => {
-      auth.createRisk(riskpostobj).then(response => {
+    client.mutate({mutation: createriskGraphQL.CREATE_RISK_MUTATION, variables}).then(response => {          
         var output = response
         console.log('createRisk Response Data')
         console.log(output)        
@@ -50,7 +52,8 @@ function createRisk(risktype, riskFieldArray, inputFormFields) {
 }
 
 function processRiskFields(risktype, riskFieldArray, inputFormFields) {
-  var riskpostobj = new RiskPostData(risktype, 
+  let intRiskType = parseInt(risktype)
+  var riskpostobj = new RiskPostData(intRiskType, 
                             inputFormFields.risk_name, inputFormFields.risk_description)
   let splicedRiskFields = null
   console.log('Inside processRiskFields')
@@ -60,7 +63,8 @@ function processRiskFields(risktype, riskFieldArray, inputFormFields) {
       console.log(splicedRiskField.risktypefield)
       console.log(splicedRiskField.risk_type_field_name)
       console.log(inputFormFields[splicedRiskField.risk_type_field_name])      
-      riskpostobj.addRiskField(splicedRiskField.risktypefield,
+      let intRiskTypeField = parseInt(splicedRiskField.risktypefield)
+      riskpostobj.addRiskField(intRiskTypeField,
         inputFormFields[splicedRiskField.risk_type_field_name])
     }   
   }

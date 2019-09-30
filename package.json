@@ -1,5 +1,5 @@
 {
-  "name": "@maheshbodas/reactjs-poc-ui-master",
+  "name": "@maheshbodas/apollo-reactjs-poc-ui-master",
   "version": "1.0.0",
   "description": "An application to Create and View user defined entities.",
   "engines": {
@@ -7,13 +7,13 @@
     "npm": ">= 3.0.0"
   },
   "author": "Mahesh Bodas",
-  "homepage": "https://reactjs-poc-ui-master.herokuapp.com",
+  "homepage": "https://apollo-reactjs-poc-ui-master.herokuapp.com",
   "copyright": "Copyright 2019 Mahesh Bodas",
   "license": "MIT",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:MaheshBodas/reactjs-poc-ui-master.git"
+    "url": "git@github.com:MaheshBodas/apollo-reactjs-poc-ui-master.git"
   },
   "dependencies": {
     "@coreui/coreui": "^2.1.7",
@@ -26,6 +26,11 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.0.8",
     "@types/reactstrap": "^8.0.1",
+    "apollo-boost": "^0.4.4",
+    "apollo-cache-inmemory": "^1.3.6",
+    "apollo-client": "^2.4.3",
+    "apollo-link-http": "^1.5.5",
+    "apollo-link-schema": "^1.1.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
@@ -37,8 +42,12 @@
     "enzyme-adapter-react-16": "^1.10.0",
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
+    "graphql-tools": "^4.0.2",
     "history": "^4.9.0",
     "js-cookie": "^2.2.0",
+    "lodash": "4.17.15",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
@@ -58,7 +67,7 @@
     "serve": "^11.0.0",
     "simple-line-icons": "^2.4.1",
     "typescript": "^3.4.5"
-  },  
+  },
   "devDependencies": {
     "react-hot-loader": "^4.5.3",
     "react-scripts": "2.1.5",
@@ -66,6 +75,7 @@
   },
   "scripts": {
     "start": "serve -s build",
+    "startdev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",

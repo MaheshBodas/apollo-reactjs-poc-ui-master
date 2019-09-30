@@ -58,8 +58,8 @@ function getUserDetails(userName) {
         dispatch(request(userName));
 
         authenticationService.getUserDetails(userName)            
-            .then(
-                userDetail => dispatch(success(userDetail[0])),
+            .then(                
+                userDetail => dispatch(success(userDetail)),
                 error => dispatch(failure(error.toString()))
             );
     };

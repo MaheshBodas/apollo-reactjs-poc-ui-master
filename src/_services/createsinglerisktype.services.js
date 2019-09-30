@@ -1,18 +1,20 @@
-import auth from '../api/auth'
+import client from '../api/apolloclient'
+import { createrisktypeGraphQL } from '../_graphql';
 import { RiskTypeData } from '../utils/createrisktypectrl'
 export const createsingleriskTypeService = {    
-    createRiskType  
+    createRiskType
 };
 
 function createRiskType(riskTypeObj, risktypefields) {   
   const {risk_type_name, risk_type_description} = riskTypeObj      
   const risktypepostdata = processRiskTypeFields(risk_type_name, risk_type_description, risktypefields)
+  const variables = { riskTypeInput : risktypepostdata }; 
   console.log('Posting data to server')
   var strPostData = JSON.stringify(risktypepostdata)
   console.log(strPostData)
     
   return new Promise((resolve, reject) => {
-      auth.createRiskType(risktypepostdata).then(response => {
+    client.mutate({mutation: createrisktypeGraphQL.CREATE_RISK_TYPE_MUTATION, variables}).then(response => {          
         var output = response
         console.log('createRiskType Response Data')
         console.log(output)        

@@ -171,13 +171,15 @@ function isDuplicateRiskTypeField (risktypefields, risktypefield) {
         const output = action.output
         return {
           createsingleriskoutput: output,
-          risktypefields: state.risktypefields,
+          // risktypefields: state.risktypefields,
+          risktypefields: [],
           loading: false       
         };
       case createsinglerisktypeConstants.CREATE_SINGLE_RISK_TYPE_FAILURE:
         return { 
           error: action.error,
-          risktypefields: state.risktypefields,
+          // risktypefields: state.risktypefields,
+          risktypefields: [],
           loading: false 
         };         
       default:
