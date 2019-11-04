@@ -14,7 +14,8 @@ export const viewallrisksGraphQL= {
         risk,        
         risk_field_value,
         risk_type_field_enum,
-        risk_type_field_name
+        risk_type_field_name,
+        risk_type_field_description
       }    
     }
   }`

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'element-react';
 import * as utils from './../utils'
-import './IntegerInput.css'
+// import './IntegerInput.css'
 
 export default class IntegerInput extends Component {
     static propTypes = {        
@@ -63,7 +63,9 @@ export default class IntegerInput extends Component {
                 disabled={true}
                 value={intValue}
                 placeholder={this.props.field_name}                
-                min="0"                
+                min="0"   
+                size="small"    
+                controls={false}         
                 />                
           :
              <InputNumber
@@ -72,7 +74,8 @@ export default class IntegerInput extends Component {
                 placeholder={this.props.field_name}
                 onChange={this.numchange}
                 onBlur={this.onBlur}                  
-                min="0"              
+                min="0"     
+                size="small"         
               />                          
         );      
     }

@@ -33,7 +33,7 @@ class RiskFieldTypeList extends Component {
   render() {
     const { value } = this.state;
     return (
-      <Select value={value} clearable={true} onChange={this.handleChange}>
+      <Select value={value} clearable={true} size="small" onChange={this.handleChange}>
         {
           this.props.fieldtypeoptions && this.props.fieldtypeoptions.map(el => {
             return <Select.Option key={el.value} label={el.label} value={el.value} />

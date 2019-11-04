@@ -49,7 +49,7 @@ export function riskpicklist(state = {}, action) {
     case riskpicklistConstants.RISK_KEYS_FAILURE:
       return { 
         error: action.error
-      };
+      };        
     default:
       return state
   }

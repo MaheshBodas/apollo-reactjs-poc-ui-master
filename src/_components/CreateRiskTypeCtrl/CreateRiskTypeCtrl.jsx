@@ -320,8 +320,8 @@ class CreateRiskTypeCtrl extends Component {
                   <Layout.Row  gutter="20">
                       <Layout.Col span="16">                        { 
                         <Form.Item label="Name" prop="risk_type_field_name">
-                            { showCreateDialog && <Input value={risktypefield.risk_type_field_name} onChange={this.onChange.bind(this, 'risk_type_field_name')}/> }
-                            { (!showCreateDialog) && <Input value={risktypefield.risk_type_field_name} readOnly /> }
+                            { showCreateDialog && <Input value={risktypefield.risk_type_field_name} size="small" onChange={this.onChange.bind(this, 'risk_type_field_name')}/> }
+                            { (!showCreateDialog) && <Input value={risktypefield.risk_type_field_name} size="small" readOnly /> }
                         </Form.Item> 
                       }
                       </Layout.Col>                  
@@ -338,7 +338,7 @@ class CreateRiskTypeCtrl extends Component {
                     <Layout.Row>
                       <Layout.Col span="16">                        { 
                         <Form.Item label="Description" prop="risk_type_field_description">
-                            <Input value={risktypefield.risk_type_field_description} onChange={this.onChange.bind(this, 'risk_type_field_description')}/>
+                            <Input value={risktypefield.risk_type_field_description} size="small" onChange={this.onChange.bind(this, 'risk_type_field_description')}/>
                         </Form.Item> 
                       }
                       </Layout.Col>
@@ -349,10 +349,10 @@ class CreateRiskTypeCtrl extends Component {
             <Dialog.Footer className="dialog-footer">
               <Layout.Row gutter="20">
                 <Layout.Col span="16">
-                  <Button onClick={this.onDialogCancel}>Cancel</Button>
-                  { showCreateDialog && <Button type="primary" onClick={this.createRiskTypeFieldData}>Create</Button>
+                  <Button size="small" onClick={this.onDialogCancel}>Cancel</Button>
+                  { showCreateDialog && <Button type="primary" size="small" onClick={this.createRiskTypeFieldData}>Create</Button>
                   }
-                  { (!showCreateDialog) && <Button type="primary" onClick={this.editRiskTypeFieldData}>Update</Button>
+                  { (!showCreateDialog) && <Button type="primary" size="small" onClick={this.editRiskTypeFieldData}>Update</Button>
                   }
                 </Layout.Col>                                        
               </Layout.Row>                              
@@ -384,20 +384,20 @@ class CreateRiskTypeCtrl extends Component {
                       <Layout.Row  gutter="20">
                         <Layout.Col span="8">                        { 
                           <Form.Item label="Name" prop="risk_type_name">
-                              <Input value={this.state.risktypeform.risk_type_name} onChange={this.onRiskTypeChange.bind(this, 'risk_type_name')}/>
+                              <Input value={this.state.risktypeform.risk_type_name} size="small" onChange={this.onRiskTypeChange.bind(this, 'risk_type_name')}/>
                           </Form.Item> 
                         }
                         </Layout.Col>                  
                         <Layout.Col span="8">                        { 
                           <Form.Item label="Description" prop="risk_type_description">
-                              <Input value={this.state.risktypeform.risk_type_description} onChange={this.onRiskTypeChange.bind(this, 'risk_type_description')}/>
+                              <Input value={this.state.risktypeform.risk_type_description} size="small" onChange={this.onRiskTypeChange.bind(this, 'risk_type_description')}/>
                           </Form.Item> 
                         }
                         </Layout.Col>
                     </Layout.Row>     
                     <Layout.Row gutter="20">
                         <Layout.Col span="16">                        
-                        { <Button type="primary" onClick={ this.handleCreate }>Add Type Field</Button>}                        
+                        { <Button type="primary" size="small" onClick={ this.handleCreate }>Add Type Field</Button>}                        
                         </Layout.Col>                                        
                   </Layout.Row>  
                   <Layout.Row gutter="20">

@@ -3,7 +3,7 @@ import { riskpicklistGraphQL } from '../_graphql';
 export const riskpicklistService = {
     getRiskFieldTypeList,
     getRiskTypeKeys,
-    getRiskKeys
+    getRiskKeys    
 };
 
 function getRiskFieldTypeList() {
@@ -58,3 +58,4 @@ function getRiskKeys() {
         })
       })
 }
+

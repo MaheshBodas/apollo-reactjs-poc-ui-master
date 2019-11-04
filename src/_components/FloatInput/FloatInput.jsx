@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'element-react';
 import * as utils from './../utils'
-import './FloatInput.css'
+// import './FloatInput.css'
 
 export class FloatInput extends Component {
     static propTypes = {        
@@ -78,7 +78,8 @@ export class FloatInput extends Component {
               value={strValue}
               readOnly
               placeholder={this.props.field_name}                
-              min="1"                
+              min="1" 
+              size="mini"               
               />
           :
             <Input                          
@@ -86,7 +87,8 @@ export class FloatInput extends Component {
               value={strValue}
               onChange={this.numchange}
               onBlur={this.onBlur}              
-              min="1"              
+              min="1"  
+              size="mini"            
             />
         );      
     }

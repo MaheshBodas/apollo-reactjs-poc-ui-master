@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import {Pagination} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Layout, Form, Table } from 'element-react';
-import { viewAllRisksActions} from '../../_actions';
+import { viewRisksActions} from '../../_actions';
 import styles from './ViewRiskGrid.css.js'
 import './ViewRiskGrid.css';
 
@@ -24,7 +25,7 @@ class ViewRiskGrid extends Component {
         this.state = {
           isMounted: false      
         }; 
-        this.props.resetAllRisks()
+        this.props.resetRisks()        
     }
     
     componentDidMount() {
@@ -42,25 +43,25 @@ class ViewRiskGrid extends Component {
       
       // Fetch data related to selected RiskType
       if(selectedValue !== 'None') { 
-        if(this._isMounted) {       
-          this.props.getRisks(selectedValue)
+        if(this._isMounted) {                 
+          this.props.getRisks(selectedValue, 100, undefined)
         }
       } else {
         console.log('Dispacting resetAllRisks')        
         if(this._isMounted) {         
-          this.props.resetAllRisks()
+          this.props.resetRisks()
         }
       }
     }
 
     componentDidCatch(error, info) {
       console.log('componentDidCatch ' + error)                
-    }    
+    }        
 
-    render() {
-      const {type, message, riskInstancesTable, riskInstanceTableColumns} = this.props;      
+    render() {            
+      const {type, message, risk_type_id, record_count, riskInstancesTable, riskInstanceTableColumns, pageInfo} = this.props;      
       const errorInfo = {type: type, message: message}      
-      const oRiskTableColumns = riskInstanceTableColumns || emptyColumnNames
+      const oRiskTableColumns = riskInstanceTableColumns || emptyColumnNames      
       console.log('riskInstancesTable')    
       // console.log(riskInstancesTable)            
       return (
@@ -73,7 +74,7 @@ class ViewRiskGrid extends Component {
                     <Layout.Col span="8">
                       <Form.Item label="Select Risk Type" labelWidth="120px">                        
                         <RiskTypeList disabled={this.props.loading} onChange={this.onRiskTypeChange}></RiskTypeList>
-                      </Form.Item> 
+                      </Form.Item>                      
                     </Layout.Col>              
                 </Layout.Row>
               </Form>     
@@ -97,9 +98,20 @@ class ViewRiskGrid extends Component {
                           style={{width: '100%'}}                          
                           columns={oRiskTableColumns} 
                           data={riskInstancesTable}
+                          border={true}
                           height={250}
                      />
-                    }                                       
+                    } 
+                    <br/>  
+                    {
+                      riskInstancesTable && pageInfo && 
+                      <Pagination>
+                        <Pagination.Item disabled={!pageInfo.hasPreviousPage} 
+                          onClick={() => this.props.getPrevRisks(risk_type_id, record_count, pageInfo.lastFetchedCursor)}>&larr; Previous Page</Pagination.Item>
+                        <Pagination.Item disabled={!pageInfo.hasNextPage} 
+                          onClick={() => this.props.getNextRisks(risk_type_id, record_count, pageInfo.endCursor)}>Next Page &rarr;</Pagination.Item>
+                      </Pagination>
+                    }                 
                   </div>
                 ),                
                 errorInfo: errorInfo
@@ -114,11 +126,12 @@ class ViewRiskGrid extends Component {
 }
 
 function mapStateToProps(state) {
-    const { alert, authentication, viewallrisks } = state;        
+    // const { alert, authentication, viewallrisks } = state;        
+    const { alert, authentication, viewrisks } = state;        
     const { loggingIn } = authentication;
     const {type, message} = alert;
-    const { risktype, riskInstancesTable, riskInstanceTableColumns, loading } = viewallrisks;        
-
+    const { risk_type_id, record_count, riskInstancesTable, riskInstanceTableColumns, pageInfo, loading } = viewrisks;        
+    
     let shouldDisplayMain = false    
     let showFooter = false    
     let hasError = false
@@ -132,16 +145,18 @@ function mapStateToProps(state) {
       hasError = true
       console.log('This is an error')
     }    
-    console.log('mapStateToProps Single risk' + viewallrisks)    
+    console.log('mapStateToProps Single risk' + viewrisks)    
     return {      
       loggingIn,
       type,
       message,
       shouldDisplayMain,
       showFooter,
-      risktype,
+      risk_type_id,
+      record_count,
       riskInstancesTable,
       riskInstanceTableColumns,
+      pageInfo,      
       loading,
       hasError
     }    
@@ -149,8 +164,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {        
-        getRisks: (risktypeid) => dispatch( viewAllRisksActions.getRisks(risktypeid) ),        
-        resetAllRisks: () => dispatch(viewAllRisksActions.resetAllRisks())
+        getRisks: (risktypeid, record_count, fetchAfterCursor) => dispatch( viewRisksActions.getRisks(risktypeid, record_count, fetchAfterCursor) ),        
+        getNextRisks: (risktypeid, record_count, fetchAfterCursor) => dispatch( viewRisksActions.getNextRisks(risktypeid, record_count, fetchAfterCursor) ),        
+        getPrevRisks: (risktypeid, record_count, fetchAfterCursor) => dispatch( viewRisksActions.getPrevRisks(risktypeid, record_count, fetchAfterCursor) ),        
+        resetRisks: () => dispatch(viewRisksActions.resetRisks())
     }
 }
 

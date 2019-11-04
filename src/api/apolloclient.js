@@ -1,10 +1,10 @@
-import {ApolloClient, ApolloLink, HttpLink, InMemoryCache} from 'apollo-boost'
-import { getToken } from './../utils/auth'
-// import {ApolloClient, HttpLink, InMemoryCache} from 'apollo-boost'
-const isProduction = process.env.NODE_ENV !== 'development';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
-// const productionUrl = 'http://localhost:9527/admingq/graphql/';
-// const testUrl = 'http://localhost:9527/admingq/graphql/';
+import { getToken } from './../utils/auth'
+const isProduction = process.env.NODE_ENV !== 'development';
 
 const productionUrl = process.env.REACT_APP_BASE_API + '/admingq/graphql/';
 const testUrl = process.env.REACT_APP_BASE_API + '/admingq/graphql/';
@@ -16,21 +16,6 @@ const url = isProduction ? productionUrl : testUrl;
 // const token = 'c7aa0dc9f76b3fbcf5d1b7453d3ea163f25d2f2a' // + getToken()
 const token =  getToken()
 console.log('Sending Authorization as ' + token)
-const httpLink = new HttpLink({ uri: url });
-const authLink = new ApolloLink((operation, forward) => {
-// // Retrieve the authorization token from local storage.
-// const token = localStorage.getItem('auth_token');
-
-  // Use the setContext method to set the HTTP headers.
-  operation.setContext({
-    headers: {
-      authorization: token ? `Token ${token}` : ''
-    }
-  });
-
-  // Call the next link in the middleware chain.
-  return forward(operation);
-});
 
 const defaultOptions = {
   watchQuery: {
@@ -43,11 +28,29 @@ const defaultOptions = {
   },
 }
 
-let client = new ApolloClient({
-  link: authLink.concat(httpLink), // Chain it with the HttpLink  
-  cache:new InMemoryCache(),    
-  defaultOptions: defaultOptions,
-})
+const httpLink = createHttpLink({
+  uri: url,
+});
 
-  
-  export default client;
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  // const token = localStorage.getItem('token');
+  const token = getToken()
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      // authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Token ${token}` : ''
+    }
+  }
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+  defaultOptions: defaultOptions,
+});
+//
+
+export default client;

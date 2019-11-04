@@ -69,7 +69,8 @@ export class TextInput extends Component {
               <Input
                 value={textValue}
                 readOnly
-                placeholder={this.props.field_name}                
+                placeholder={this.props.field_name}                  
+                size="small"              
                 />                                
           :
             <Input
@@ -78,7 +79,7 @@ export class TextInput extends Component {
               onChange={this.textchange.bind(this)}                            
               // onChange={(e) => this.props.handleChange(e, this.props.field_name)}
               onBlur={this.onBlur.bind(this)}   
-              className="ui-widget ui-widget-content ui-corner-all"           
+              size="small"               
               />                          
         );      
     }

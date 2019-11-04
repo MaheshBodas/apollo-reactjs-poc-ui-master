@@ -39,7 +39,7 @@ class RiskTypeList extends Component {
     // const { selectedValue } = this.state;
     return (
       // <Select value={selectedValue} clearable={true} onChange={this.handleChange}>
-      <Select clearable={true} disabled={this.props.disabled} loading={this.props.loading} onChange={this.handleChange} className="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-closed ui-corner-all">
+      <Select clearable={true} disabled={this.props.disabled} loading={this.props.loading} onChange={this.handleChange} size="small" className="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-closed ui-corner-all">
         {
           this.props.risktypekeys && this.props.risktypekeys.map(el => {
             return <Select.Option key={el.id} label={el.risk_type_name} value={el.id} />

@@ -15,20 +15,48 @@ function itemsInRow(riskfields,itemsPerRow,index) {
     return riskfields.slice((index - 1) * itemsPerRow, index * itemsPerRow)
 }
 
-const initialState = [
-  {
+const initialState = {
     riskobj : new Risk(0,0,'','','',[]),
     nRows : 0,
-    splicedRiskFieldArray : null
+    splicedRiskFieldArray : null,
+    riskInstancesTable: [],
+    risk_name: '',
+    pageInfo: {
+      lastFetchedCursor: undefined,
+      endCursor: undefined,
+      hasNextPage: false,
+      hasPreviousPage: false
+    }
   }
-]
+  
+function createRiskTableRow(edgeInstance) {  
+  let riskinstance = edgeInstance.node  
+  return riskinstance
+}
 
-export function viewsinglerisk(state = initialState, action) {
+function processRiskInstances(riskinstances, riskInstancesTable, pageInfo) {                  
+    console.log('processRiskInstances')
+    console.log(riskinstances.edges)
+    console.log('processRiskInstances pageInfo')
+    console.log(pageInfo)
+    
+    if (riskinstances.edges && riskinstances.edges.length > 0) {
+        pageInfo.endCursor = riskinstances.pageInfo.endCursor
+        pageInfo.hasNextPage = riskinstances.pageInfo.hasNextPage        
+        riskInstancesTable = riskinstances.edges.map(createRiskTableRow)
+    }
+    return {      
+      pageInfo: pageInfo,
+      riskInstancesTable: riskInstancesTable,      
+    }
+}
+
+
+export function viewsinglerisk(state = initialState, action) {  
   switch (action.type) {
-    case viewsingleriskConstants.GET_SINGLE_RISK:
-      return {
-        loading: true
-      };
+    case viewsingleriskConstants.GET_SINGLE_RISK:      
+      let stateNew = Object.assign({}, state, {loading: true});
+      return stateNew
     case viewsingleriskConstants.GET_SINGLE_RISK_SUCCESS:
       console.log('In viewsingleriskConstants.GET_SINGLE_RISK_SUCCESS')      
       console.log('In viewsingleriskConstants.GET_SINGLE_RISK_SUCCESS action is' + action.riskinstance)      
@@ -51,9 +79,10 @@ export function viewsinglerisk(state = initialState, action) {
         // Populate RiskFields collection from data received from server
         const risk_riskfields = [...action.riskinstance.risk_riskfields]
         for (const riskfield of risk_riskfields) {
-          var { risktypefield, risk_type_field_name, risk_type_field_enum, risk_field_value } =
+          var { risktypefield, risk_type_field_name, risk_type_field_description,  risk_type_field_enum, risk_field_value } =
                   { risktypefield: riskfield.risktypefield,
                     risk_type_field_name: riskfield.risk_type_field_name,
+                    risk_type_field_description: riskfield.risk_type_field_description,
                     risk_type_field_enum: riskfield.risk_type_field_enum,
                     risk_field_value: riskfield.risk_field_value }
           if (risk_type_field_enum === 'currency') {
@@ -63,16 +92,16 @@ export function viewsinglerisk(state = initialState, action) {
             risktypefield,
             risk_type_field_name,
             risk_type_field_enum,
-            '',
+            risk_type_field_description,
             risk_field_value)
           // console.log(riskInstance)
           riskobj.riskfields.push(riskFieldInstance)          
         }
       
         if(riskobj && riskobj.riskfields) {
-          // Sort riskfields by risk_type_field_name
+          // Sort riskfields by risk_type_field_description
           riskobj.riskfields.sort(function(a, b){
-              var nameA=a.risk_type_field_name.toLowerCase(), nameB=b.risk_type_field_name.toLowerCase()
+              var nameA=a.risk_type_field_description.toLowerCase(), nameB=b.risk_type_field_description.toLowerCase()
               if (nameA < nameB) //sort string ascending
                   return -1 
               if (nameA > nameB)
@@ -92,17 +121,18 @@ export function viewsinglerisk(state = initialState, action) {
           splicedRiskFields = itemsInRow(riskfields, itemsPerRow, i+1) 
           splicedRiskFieldArray.push([...splicedRiskFields])       
         }      
-      }
-      return {
-        riskid: riskobj.id,
-        singlerisk: riskobj,
-        rows: nRows,
-        riskFieldArray: splicedRiskFieldArray,
-        loading: false
-      };
+      }      
+      stateNew = Object.assign({}, state, 
+        { riskid: riskobj.id },
+        { singlerisk: riskobj },
+        { rows: nRows },
+        { riskFieldArray: splicedRiskFieldArray },
+        { loading: false });
+      return stateNew
     case viewsingleriskConstants.GET_SINGLE_RISK_FAILURE:
       return { 
-        error: action.error
+        error: action.error,
+        loading: false
       };
     case viewsingleriskConstants.RESET_VIEW_SINGLE_RISK:
       console.log('In viewsingleriskConstants.RESET_VIEW_SINGLE_RISK')      
@@ -112,11 +142,34 @@ export function viewsinglerisk(state = initialState, action) {
       riskobj.riskfields = []
       nRows = 0
       splicedRiskFieldArray = null
-      return {
-        riskid: riskobj.id,
-        singlerisk: riskobj,
-        rows: nRows,
-        riskFieldArray: splicedRiskFieldArray,
+      stateNew = Object.assign({}, state, 
+        { riskid: riskobj.id },
+        { singlerisk: riskobj },
+        { rows: nRows },
+        { riskFieldArray: splicedRiskFieldArray },
+        { loading: false });
+      return stateNew      
+    case viewsingleriskConstants.RISK_AUTO_COMPLETE_KEYS: 
+      let risk_name = action.risk_name     
+      stateNew = Object.assign({}, state, {loading: true}, {risk_name: risk_name});
+      return stateNew
+    case viewsingleriskConstants.RISK_AUTO_COMPLETE_SUCCESS:
+      console.log('In viewsingleriskConstants.RISK_AUTO_COMPLETE_SUCCESS')      
+      const riskinstances = action.riskinstances
+      console.log('RISK_AUTO_COMPLETE_SUCCESS state')
+      console.log(state)
+      // let riskinstances = action.riskinstances      
+      state.riskInstancesTable = []
+      let output = processRiskInstances(riskinstances, state.riskInstancesTable, state.pageInfo)
+      console.log('output')
+      console.log(output)
+      state.pageInfo = output.pageInfo
+      stateNew = Object.assign({}, state, {loading: false}, {riskinstances: output.riskInstancesTable} ,        
+                  {pageInfo: output.pageInfo} ); 
+      return stateNew
+    case viewsingleriskConstants.RISK_AUTO_COMPLETE_FAILURE:
+      return { 
+        error: action.error,
         loading: false
       };
     default:

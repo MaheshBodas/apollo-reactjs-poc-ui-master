@@ -8,6 +8,7 @@ import { viewsinglerisk} from './viewsinglerisk.reducer';
 import { createsinglerisk} from './createsinglerisk.reducer';
 import { risktypefield, risktypefields, createsinglerisktype} from './createsinglerisktype.reducer';
 import { viewallrisks} from './viewallrisks.reducer';
+import { viewrisks } from './viewrisks.reducer';
 import { riskpicklist } from './riskpicklist.reducer'
 // import { spliceriskfields} from './spliceriskfields.reducer';
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   risktypefields,
   createsinglerisktype,
   viewallrisks,
+  viewrisks,
   riskpicklist
   // spliceriskfields
 });

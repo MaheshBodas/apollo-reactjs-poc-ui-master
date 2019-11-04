@@ -3,7 +3,8 @@ import { viewsingleriskService } from '../_services';
 import { alertActions } from './';
 export const viewsingleriskActions = {
     getRisk,
-    resetSingleRisk
+    resetSingleRisk,    
+    getRisksByRiskName
 };
 
 function getRisk(riskid, itemsPerRow) {
@@ -39,4 +40,30 @@ function resetSingleRisk() {
         dispatch(alertActions.clear());
     }
     function request() { return { type: viewsingleriskConstants.RESET_VIEW_SINGLE_RISK } }
+}
+
+//getRisksByRiskName
+
+function getRisksByRiskName(risk_name, record_count, fetchAfterCursor) {
+    return dispatch => {  
+        console.log('getRisksByRiskName' )   
+        dispatch(request(risk_name, record_count, fetchAfterCursor));             
+        viewsingleriskService.getRisksByRiskName(risk_name, record_count, fetchAfterCursor)
+            .then(
+                riskinstances => {                    
+                    dispatch(success(riskinstances));
+                    dispatch(alertActions.clear());                    
+                },
+                error => {
+                    console.log(error.toString())
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )           
+            
+    };
+
+    function request(risk_name, record_count, fetchAfterCursor) { return { type: viewsingleriskConstants.RISK_AUTO_COMPLETE_KEYS, risk_name, record_count, fetchAfterCursor} }
+    function success(riskinstances) { return { type: viewsingleriskConstants.RISK_AUTO_COMPLETE_SUCCESS , riskinstances} }
+    function failure(error) { return { type: viewsingleriskConstants.RISK_AUTO_COMPLETE_FAILURE, error } }
 }

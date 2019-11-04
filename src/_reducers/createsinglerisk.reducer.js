@@ -40,7 +40,7 @@ function createRiskField (risktypefield) {
 }
 
 function riskFieldCompare(a, b){
-  var nameA=a.risk_type_field_name.toLowerCase(), nameB=b.risk_type_field_name.toLowerCase()
+  var nameA=a.risk_type_field_description.toLowerCase(), nameB=b.risk_type_field_description.toLowerCase()
   if (nameA < nameB) //sort string ascending
       return -1 
   if (nameA > nameB)

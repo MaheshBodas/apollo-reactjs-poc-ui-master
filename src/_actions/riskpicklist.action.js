@@ -76,3 +76,4 @@ function getRiskKeys() {
     function success(riskkeys) { return { type: riskpicklistConstants.RISK_KEYS_SUCCESS , riskkeys} }
     function failure(error) { return { type: riskpicklistConstants.RISK_KEYS_FAILURE, error } }
 }
+

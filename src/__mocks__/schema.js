@@ -34,7 +34,8 @@ export const typeDefs = `
 	risk: String
 	risktypefield: String
 	risk_type_field_name: String
-	risk_type_field_enum: String
+  risk_type_field_enum: String
+  risk_type_field_description: String
   } 
 
   type RiskQL {
@@ -123,28 +124,36 @@ export const all_risks = [
             "risktypefield": "1",
             "risk": "1",
             "risk_field_value": "TYT1000",
-            "risk_type_field_name": "model"
+            "risk_type_field_name": "model",
+            "risk_type_field_enum": "text",
+            "risk_type_field_description": "Model of Automobile",
           },
           {
             "id": "2",
             "risktypefield": "2",
             "risk": "1",
             "risk_field_value": "4",
-            "risk_type_field_name": "doors"
+            "risk_type_field_name": "doors",
+            "risk_type_field_enum": "integer",
+            "risk_type_field_description": "Number of doors"
           },
           {
             "id": "3",
             "risktypefield": "3",
             "risk": "1",
             "risk_field_value": "1000.00",
-            "risk_type_field_name": "amount"
+            "risk_type_field_name": "amount",
+            "risk_type_field_enum": "currency",
+            "risk_type_field_description": "Insurance Amount"
           },
           {
             "id": "4",
             "risktypefield": "4",
             "risk": "1",
             "risk_field_value": "11/01/2004",
-            "risk_type_field_name": "issuedate"
+            "risk_type_field_name": "issuedate",
+            "risk_type_field_enum": "date",
+            "risk_type_field_description": "License issued on date(MM/dd/yyyy)"
           }
         ]
       },
@@ -160,28 +169,36 @@ export const all_risks = [
             "risktypefield": "5",
             "risk": "2",
             "risk_field_value": "RL110107",
-            "risk_type_field_name": "housenumber"
+            "risk_type_field_name": "housenumber",
+            "risk_type_field_enum": "text",
+            "risk_type_field_description": "House number alloted by corporation"
           },
           {
             "id": "6",
             "risktypefield": "6",
             "risk": "2",
             "risk_field_value": "2",
-            "risk_type_field_name": "floors"
+            "risk_type_field_name": "floors",
+            "risk_type_field_enum": "integer",
+            "risk_type_field_description": "Number of floors"
           },
           {
             "id": "7",
             "risktypefield": "7",
             "risk": "2",
             "risk_field_value": "10000.00",
-            "risk_type_field_name": "sum"
+            "risk_type_field_name": "sum",
+            "risk_type_field_enum": "currency",
+            "risk_type_field_description": "Sum Insurance Amount"
           },
           {
             "id": "8",
             "risktypefield": "8",
             "risk": "2",
             "risk_field_value": "02/23/2001",
-            "risk_type_field_name": "completion"
+            "risk_type_field_name": "completion",
+            "risk_type_field_enum": "date",
+            "risk_type_field_description": "Construction completion date",
           }
         ]
       }                 

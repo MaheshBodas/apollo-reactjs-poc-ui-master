@@ -100,7 +100,9 @@ export class DateInput extends Component {
                   isDisabled={isReadOnly}
                   format="MM/dd/yyyy"
                   // placeholder="Pick a day"
-                  placeholder={this.props.field_name}                                    
+                  placeholder={this.props.field_name}   
+                  isShowTrigger={false}
+                  size="mini"                                 
                 >                  
                 </DatePicker>
               :
@@ -109,7 +111,8 @@ export class DateInput extends Component {
                 format="MM/dd/yyyy"
                 // placeholder="Pick a day"
                 placeholder={this.props.field_name}
-                onChange={this.datechange}                                            
+                onChange={this.datechange} 
+                size="mini"                                            
                 >                
               </DatePicker>         
               

@@ -44,6 +44,7 @@ function logout() {
           console.log('Logout reponse Data')
           console.log(data)
           removeToken()
+          client.resetStore()
           resolve()           
         } else {
           const strError  = 'Logout failed for user'

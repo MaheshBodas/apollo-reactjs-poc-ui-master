@@ -33,7 +33,8 @@ const defaultOptions = {
             "risk": "1",
             "risk_type_field_enum": "text",
             "risk_field_value": "TYT1000",
-            "risk_type_field_name": "model"
+            "risk_type_field_name": "model",
+            "risk_type_field_description": "Model of Automobile"
           },
           {
             "id": "2",
@@ -41,7 +42,8 @@ const defaultOptions = {
             "risk": "1",
             "risk_type_field_enum": "integer",
             "risk_field_value": "4",
-            "risk_type_field_name": "doors"
+            "risk_type_field_name": "doors",
+            "risk_type_field_description": "Number of doors"
           },
           {
             "id": "3",
@@ -49,7 +51,8 @@ const defaultOptions = {
             "risk": "1",
             "risk_type_field_enum": "currency",
             "risk_field_value": "1000.00",
-            "risk_type_field_name": "amount"
+            "risk_type_field_name": "amount",
+            "risk_type_field_description": "Insurance Amount"
           },
           {
             "id": "4",
@@ -57,7 +60,8 @@ const defaultOptions = {
             "risk": "1",
             "risk_type_field_enum": "date",
             "risk_field_value": "11/01/2004",
-            "risk_type_field_name": "issuedate"
+            "risk_type_field_name": "issuedate",
+            "risk_type_field_description": "License issued on date(MM/dd/yyyy)"
           }
         ]
       }

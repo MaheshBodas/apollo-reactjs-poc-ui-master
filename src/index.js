@@ -2,6 +2,8 @@ import 'react-app-polyfill/ie9'; // For IE 9-11 support
 import 'react-app-polyfill/ie11'; // For IE 11 support
 import './polyfill'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import './themes/redmond/jquery-ui.min.css'
 // import './themes/html5up/assets/css/main.css'
 // import './_components/RotatingDisplay/RotatingDisplay.css'
@@ -19,6 +21,7 @@ import { i18n } from 'element-react'
 import locale from 'element-react/src/locale/lang/en'
 
 import App from './App'
+// import client from './api/apolloclient'
 // import ConnectedApp from './ConnectedApp'
 
 //Strip console.log

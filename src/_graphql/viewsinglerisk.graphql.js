@@ -14,8 +14,28 @@ export const viewsingleriskGraphQL= {
           risk,  
           risk_type_field_enum,            
           risk_type_field_name,
+          risk_type_field_description,
           risk_field_value
         }    
       }
-    }`
+    }`,
+    GET_RISK_AUTO_COMPLETE_QUERY: gql`
+        query geRisksByRiskName($riskname:String, $first: Int, $after: String ) {
+            riskinstances:risks(risk_name:$riskname, first:$first, after:$after ){
+                pageInfo {
+                    startCursor
+                    endCursor
+                    hasNextPage
+                    hasPreviousPage
+                }
+                edges {
+                    cursor
+                    node {
+                        id,
+                        ID,     
+                        risk_name
+                    }
+                }
+            }     
+        }`
 };

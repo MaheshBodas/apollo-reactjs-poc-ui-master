@@ -2,7 +2,7 @@ import { viewallrisksConstants } from '../_constants';
 import * as utilsfunc from '../utils/commonutils'
 
 function riskFieldCompare(a, b){
-  var nameA=a.risk_type_field_name.toLowerCase(), nameB=b.risk_type_field_name.toLowerCase()
+  var nameA=a.risk_type_field_description.toLowerCase(), nameB=b.risk_type_field_description.toLowerCase()
   if (nameA < nameB) //sort string ascending
       return -1 
   if (nameA > nameB)
@@ -20,8 +20,8 @@ function appendCurrencySymbol(curvalue) {
 
 function getRiskTableColumn (riskfield) {
   return {
-    label: utilsfunc.capitalize(riskfield.risk_type_field_name),                
-    width: 150,
+    label: utilsfunc.capitalize(riskfield.risk_type_field_description),                
+    width: 200,
     prop: riskfield.risk_type_field_name
   }
 }
@@ -56,8 +56,8 @@ export function viewallrisks(state = {}, action) {
       let riskinstances = action.riskinstances      
       let riskInstancesTable = riskinstances.map(createRiskTableRow)      
       let riskInstanceTableColumns = [
-                                      { label: "Risk Name", width: 150, prop: "risk_name" },
-                                      { label: "Risk Description", width: 250, prop: "risk_description" }
+                                      { label: "Risk Name", width: 150, fixed: 'left', prop: "risk_name" },
+                                      { label: "Risk Description", width: 225, fixed: 'left', prop: "risk_description" }
                                     ]
       let riskFieldColumns = []
       let risktype = ''

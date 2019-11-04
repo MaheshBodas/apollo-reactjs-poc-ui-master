@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'element-react';
 import * as utils from './../utils'
-import './CurrencyInput.css'
+// import './CurrencyInput.css'
 
 export class CurrencyInput extends Component {
     static propTypes = {
@@ -87,7 +87,8 @@ export class CurrencyInput extends Component {
                 value={strValue}
                 readOnly
                 placeholder={this.props.field_name}                
-                min="1"                
+                min="1"     
+                size="small"                  
                 >                
               </Input>
           :
@@ -98,7 +99,8 @@ export class CurrencyInput extends Component {
               onBlur={this.onBlur}
               onFocus={this.onFocus}
               onChange={this.numchange}
-              min="1"              
+              min="1"      
+              size="small"         
               >              
             </Input>
         );      

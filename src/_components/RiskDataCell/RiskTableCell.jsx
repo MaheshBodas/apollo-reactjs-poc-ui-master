@@ -29,7 +29,7 @@ export default class RiskDataCell extends React.Component {
       const {riskField, formInputState, isReadOnly, iColumn, handleChange } = this.props      
       let fieldCaption = ''
       if(riskField) {
-        fieldCaption = utilsfunc.capitalize(riskField.risk_type_field_name)
+        fieldCaption = utilsfunc.capitalize(riskField.risk_type_field_description)
       }
       // console.log('Render readonly controls ' + isReadOnly)
       const cellMarkup = isReadOnly ?           
