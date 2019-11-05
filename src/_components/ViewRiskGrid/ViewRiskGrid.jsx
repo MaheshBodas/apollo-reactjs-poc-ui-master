@@ -3,6 +3,7 @@ import {Pagination} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Layout, Form, Table } from 'element-react';
 import { viewRisksActions} from '../../_actions';
+import {viewrisksConstants} from '../../_constants';
 import styles from './ViewRiskGrid.css.js'
 import './ViewRiskGrid.css';
 
@@ -38,13 +39,14 @@ class ViewRiskGrid extends Component {
     }
 
     onRiskTypeChange = event => {
+      const PER_PAGE_RECORDS = viewrisksConstants.GET_RISKS_PAGE_SIZE
       const selectedValue = (event !== '') ? event : 'None'      
       console.log('onRiskTypeChange selectedValue is ' + selectedValue)
       
       // Fetch data related to selected RiskType
       if(selectedValue !== 'None') { 
         if(this._isMounted) {                 
-          this.props.getRisks(selectedValue, 100, undefined)
+          this.props.getRisks(selectedValue, PER_PAGE_RECORDS, undefined)
         }
       } else {
         console.log('Dispacting resetAllRisks')        

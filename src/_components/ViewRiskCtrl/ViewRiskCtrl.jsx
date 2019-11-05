@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Layout, Form, Input } from 'element-react';
 import {AsyncTypeahead} from 'react-bootstrap-typeahead'
 import { viewsingleriskActions} from '../../_actions';
+import {viewsingleriskConstants} from '../../_constants';
 import './ViewRiskCtrl.css';
 
 import { RiskDataTable } from './../RiskDataTable/RiskDataTable'
@@ -112,8 +113,9 @@ export class ViewRiskCtrl extends Component {
     }
 
     _handleSearch = (query) => {
+      const page_size = viewsingleriskConstants.RISK_AUTO_COMPLETE_KEYS_PAGE_SIZE
       console.log("getRiskAutoComplete")
-      this.props.getRisksByRiskName(query,25,undefined)
+      this.props.getRisksByRiskName(query,page_size,undefined)
     }
 
 
