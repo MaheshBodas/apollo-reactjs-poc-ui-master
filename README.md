@@ -10,7 +10,7 @@
 ``` bash
 
 # Clone project
-git clone https://github.com/MaheshBodas/reactjs-poc-ui-master.git
+git clone https://github.com/MaheshBodas/apollo-reactjs-poc-ui-master
 
 # Install dependencies
 npm install
