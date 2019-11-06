@@ -102,8 +102,8 @@ export class Dashboard extends Component {
                 <br/>
                 <Layout.Row>
                   <Layout.Col span="24" style={styles.helpTextLabel}>
-                      Any User can view details of Single Risk Instance. User will select Risk instance name from Dropdown.
-											Page will populate dynamic form having appropriate controls based on each Risk type field defined in given Risk Instance.
+                      Any User can view details of Single Risk Instance. User will select Risk instance name from Auto Complete dropdown.
+											Once user click Get Risk Detail button, Page will populate dynamic form having appropriate controls based on each Risk type field defined in given Risk Instance.
 											Thus page will render either text or date or interger or currency or float control in readonly mode to show field value per Risk Field.										                      
                   </Layout.Col>
                 </Layout.Row>
@@ -123,8 +123,9 @@ export class Dashboard extends Component {
                 <br/>
                 <Layout.Row>
                   <Layout.Col span="24" style={styles.helpTextLabel}>
-                      Any User can view All Risk Instance(s) for selected Risk Type. User will select Risk Type name from Dropdown.
-											Page will show all Risk instance name, description along with all Risk Fields  for givem instance in tabular format.
+                      Any User can paginate through All Risk Instance(s) for selected Risk Type. User will select Risk Type name from Dropdown.
+											Page will show Risk instance name, description along with all Risk Fields associated with given instance in tabular format.
+                      User can navigate forward and backward through various pages of Risk Instances records for selected Risk Type.
                   </Layout.Col>
                 </Layout.Row>                                         
               </div>
