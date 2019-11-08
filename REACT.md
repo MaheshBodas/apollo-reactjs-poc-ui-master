@@ -60,8 +60,9 @@ reactjs-poc-ui-master\trunk#v1.0.0
     +---api
     |       auth.js
     |       session.js
-    |       table.js
-    |       
+    |       table.js 
+    |       apolloclient.js
+	|  
     +---assets
     |   \---img
     |       \---brand
@@ -133,7 +134,18 @@ reactjs-poc-ui-master\trunk#v1.0.0
     |       request.js
     |       risk.js
     |       riskfieldinstance.js
+	|       stack.js
     |       validate.js
+	|
+	|
+	+---_graphql
+	|		authentication.graphql.js
+	|		createrisktype.graphql.js
+	|		createsinglerisk.graphql.js
+	|		riskpicklist.graphql.js
+	|		viewallrisks.graphql.js
+	|		viewrisks.graphql.js
+	|		viewsinglerisk.graphql.js
     |       
     +---views
     |   |   index.js
@@ -160,7 +172,7 @@ reactjs-poc-ui-master\trunk#v1.0.0
     |       index.js
     |       riskpicklist.action.js
     |       user.actions.js
-    |       viewallrisks.action.js
+    |       viewrisks.action.js
     |       viewsinglerisk.actions.js
     |       
     +---_components
@@ -267,7 +279,7 @@ reactjs-poc-ui-master\trunk#v1.0.0
     |       index.js
     |       riskpicklist.constants.js
     |       user.constants.js
-    |       viewallrisks.constants.js
+    |       viewrisks.constants.js
     |       viewsinglerisk.constants.js
     |       
     +---_data
@@ -297,7 +309,7 @@ reactjs-poc-ui-master\trunk#v1.0.0
     |       riskpicklist.reducer.js
     |       spliceriskfields.reducer.js
     |       users.reducer.js
-    |       viewallrisks.reducer.js
+    |       viewrisks.reducer.js
     |       viewsinglerisk.reducer.js
     |       
     +---_services
