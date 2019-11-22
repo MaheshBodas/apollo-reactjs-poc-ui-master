@@ -4,9 +4,13 @@
 
 > Here is brief introduction to functionality it offers.
 
-> 1. Allow user to Create RiskTypes which is defining new Entity in system and attributes associated with that Entity. > 2. Frontend makes use of GraphQL mutation and nested input types to create new RiskType (Entity on server)
+1. Allow user to Create RiskTypes which is defining new Entity in system and attributes associated with that Entity. 
+2. Frontend makes use of GraphQL mutation and nested input types to create new RiskType (Entity on server).
+3. Allow user to Create Risk Instances based on RiskType which is like creating and saving objects of chosen type.
+4. User can browse RiskTypes and Risk. 
+5. View Single Risk screen let user to select Risk name from Autocomplete dropdown box. Upon selection user fetches details of single  Risk Instance.
 
-and Risk based on RiskTypes. User can browse RiskTypes and Risk. It uses ReactJS, Redux for global state store, Redux-thunk middleware and Element React & TypeScript & axios & Redmond theme from jQuery UI, FontAwesome & permission control & lint
+It uses ReactJS, Redux for global state store, Redux-thunk middleware and Element React & TypeScript & axios & Redmond theme from jQuery UI, FontAwesome & permission control & lint
 
 ## Demo
 ![demo](https://github.com/MaheshBodas/reactjs-poc-ui-master/blob/master/blob/Dashboard.png)
