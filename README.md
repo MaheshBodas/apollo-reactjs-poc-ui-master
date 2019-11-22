@@ -1,14 +1,15 @@
 # Apollo ReactJS PoC
 
-> A Apollo ReactJS PoC is Front end application which consume GraphQL based server. Its sends GraphQL Queries to retrive data and uses GraphQL mutations to create objects on server side.
+A Apollo ReactJS PoC is Front end application which consume GraphQL based server. Its sends GraphQL Queries to retrive data and uses GraphQL mutations to create objects on server side.
 
-> Here is brief introduction to functionality it offers.
+ Here is brief introduction to functionality it offers.
 
 1. Allow user to Create RiskTypes which is defining new Entity in system and attributes associated with that Entity. 
 2. Frontend makes use of GraphQL mutation and nested input types to create new RiskType (Entity on server).
 3. Allow user to Create Risk Instances based on RiskType which is like creating and saving objects of chosen type.
 4. User can browse RiskTypes and Risk. 
 5. View Single Risk screen let user to select Risk name from Autocomplete dropdown box. Upon selection user fetches details of single  Risk Instance.
+6. View All Risk screen lets user to paginate through list of Risk instances of chosen type both forward and backward. This achieved using cursor based pagination on server side. GraphQL only support forward only cursor by default. Backward navigation is enabled by implementing stack in Redux Store.
 
 It uses ReactJS, Redux for global state store, Redux-thunk middleware and Element React & TypeScript & axios & Redmond theme from jQuery UI, FontAwesome & permission control & lint
 
