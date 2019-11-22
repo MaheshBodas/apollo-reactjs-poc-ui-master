@@ -12,8 +12,7 @@ Apollo ReactJS PoC is Front end application which consume GraphQL based server. 
 6. View All Risk screen lets user to paginate through list of Risk instances of chosen type in both direction (forward and backward). This achieved using cursor based pagination on server side. GraphQL only support forward only cursor by default. Backward navigation is enabled by implementing stack in Redux Store.
 
 ### For details of User and Architecture guide refer following links
-- User Guide
-[a link](https://github.com/MaheshBodas/apollo-reactjs-poc-ui-master/blob/master/blob/Apollo-ReactJS-PoC-UI-Presentation.pdf)
+- [User Guide](https://github.com/MaheshBodas/apollo-reactjs-poc-ui-master/blob/master/blob/Apollo-ReactJS-PoC-UI-Presentation.pdf)
 
 ### It makes use of following technology.
 - ReactJS, Element React component library, Redmond theme from jQuery UI, FontAwesome, TypeScript, lint.
