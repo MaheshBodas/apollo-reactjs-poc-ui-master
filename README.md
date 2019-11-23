@@ -13,6 +13,7 @@ Apollo ReactJS PoC is Front end application which consume GraphQL based server. 
 
 ### For details of User and Architecture guide refer following links
 - [User Guide](https://github.com/MaheshBodas/apollo-reactjs-poc-ui-master/blob/master/blob/Apollo-ReactJS-PoC-UI-Presentation.pdf)
+- [Architecture Guide](https://github.com/MaheshBodas/apollo-reactjs-poc-ui-master/blob/master/blob/Architecture-of-ApolloClient-ReactJS-PoC.pdf)
 
 ### It makes use of following technology.
 - ReactJS, Element React component library, Redmond theme from jQuery UI, FontAwesome, TypeScript, lint.
