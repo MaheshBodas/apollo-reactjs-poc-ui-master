@@ -28,7 +28,18 @@ function login(username, password) {
           }
         }).catch(error => {
             console.log('auth.login fail')
-            reject(error)
+            // reject(error)
+            if(error instanceof TypeError){
+              const strError = error.message
+              var n = strError.search("Cannot read property 'data' of undefined");
+              if(n > -1){
+                const parsedErrorMessage = "Unable to reach to GraphQL based server please try after 5 minutes"                    
+                reject(parsedErrorMessage)
+              }
+            } 
+            else {
+              reject(error)
+            }
           })
     })
 }

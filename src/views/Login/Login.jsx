@@ -113,7 +113,17 @@ class Login extends Component {
             }
           }
           catch(err){
-            parsedErrorMessage = message
+            if(err instanceof TypeError){
+              const strError = err.message
+              var n = strError.search("Cannot read property 'data' of undefined");
+              if(n > -1){
+                parsedErrorMessage = "Unable to reach to GraphQL based server please try after 5 minutes"                    
+              }
+            } 
+            else {
+              parsedErrorMessage = message
+            }
+            
           }                  
         }
         else {
