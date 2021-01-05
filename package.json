@@ -32,7 +32,7 @@
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.5",
     "apollo-link-schema": "^1.1.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
